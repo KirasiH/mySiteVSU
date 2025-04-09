@@ -248,15 +248,11 @@ catalogLine.addEventListener('click', function(e) {
 });
 
 function checkCookies() {
-
-    console.leg("checkCookies1");  
     
     if (window.location.hash === '#Catalog') {
         showStoryList();
         return;
     }
-
-    console.leg("checkCookies1");
 
     const cookies = document.cookie.split(';').map(c => c.trim());
     const lastStoryCookie = cookies.find(c => c.startsWith('lastStoryId='));
@@ -267,8 +263,6 @@ function checkCookies() {
     } else {
         showStoryList();
     }
-
-    console.leg("checkCookies1");
 }
 
 function renderStoryList() {
