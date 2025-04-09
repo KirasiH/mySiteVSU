@@ -203,8 +203,8 @@ function showStoryContent(storyId) {
     const story = stories.find(s => s.id === storyId);
     if (!story) return;
 
-    console.log(localStorage.getItem('cookieDecision'))
-    if (localStorage.getItem('cookieDecision') === 'accepted') {
+    console.log(localStorage.getItem('cookieConsent'))
+    if (localStorage.getItem('cookieConsent') === 'accepted') {
         document.cookie = `lastStoryId=${storyId}; max-age=${60*60*24*7}; path=/`;
     }
 
