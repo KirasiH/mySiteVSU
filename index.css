@@ -1,0 +1,54 @@
+#cookie-popup {
+    position: fixed;
+    right: 20px;
+    bottom: 20px;
+    width: 300px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.2);
+    padding: 20px;
+    font-family: Arial, sans-serif;
+    z-index: 1000;
+    display: none; /* Сначала скрыто */
+    animation: slideIn 0.5s ease-out; /* Анимация появления */
+  }
+
+    
+  @keyframes slideIn {
+    from { transform: translateX(100%); }
+    to { transform: translateX(0); }
+  }
+  
+  #cookie-popup p {
+    margin: 0 0 15px 0;
+    color: #333;
+    line-height: 1.4;
+  }
+  
+  .cookie-buttons {
+    display: flex;
+    gap: 10px;
+  }
+  
+  .cookie-btn {
+    padding: 8px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    flex-grow: 1;
+  }
+  
+  #accept-cookies {
+    background: #4CAF50;
+    color: white;
+  }
+  
+  #reject-cookies {
+    background: #f1f1f1;
+    color: #333;
+  }
+  
+  .cookie-link {
+    color: #4CAF50;
+    text-decoration: none;
+  }  
