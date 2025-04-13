@@ -160,23 +160,6 @@ class StateVisibility_Indiv_content{
     }
 }
 
-class StateVisibility_In_AboutAthtor{
-
-    constructor(secondA, firstA){
-        this.second = secondA;
-        this.first = firstA;
-    }
-
-    secondAuhtor() {
-        second.style.display = 'none';
-        first.style.display = 'block';
-    }
-    firstAuhtor() {
-        second.style.display = 'block';
-        first.style.display = 'none';
-    }
-}
-
 const catalogLine = document.getElementById('catalogLink');
 const storyListContainer = document.getElementById('storyListContainer');
 const storyContentContainer = document.getElementById('storyContentContainer');
@@ -189,7 +172,6 @@ const authorName = document.getElementById('authorName');
 const authorAbout = document.getElementById('authorAbout');
 
 const StateVisibilityContener = new StateVisibility_Indiv_content(storyListContainer, storyContentContainer, storyCreator);
-const StateVisibilityAboutAthtor = new StateVisibility_In_AboutAthtor(secondAuhtor, firstAuhtor);
 
 storyCreator.style.display = 'none';
 
@@ -202,9 +184,8 @@ function showStoryList() {
 function showStoryContent(storyId) {
     const story = stories.find(s => s.id === storyId);
     if (!story) return;
-
-    console.log(localStorage.getItem('cookieConsent'))
-    if (localStorage.getItem('cookieConsent') === 'accepted') {
+    
+    if (localStorage.getItem('cookieDecision') === 'accepted') {
         document.cookie = `lastStoryId=${storyId}; max-age=${60*60*24*7}; path=/`;
     }
 
