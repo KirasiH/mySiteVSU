@@ -50,7 +50,9 @@ const stories = [
 
 И в следующий раз убежать будет гораздо сложнее...`,
         author: "Иван",
-        aboutMe: "Я люблю писать интересные истории, хотелось бы тут поделится хорошей историей"
+        aboutMe: ` записываю то, что мир старательно забыл. Истории приходят ко мне обрывками: выцветшие письма, обгоревшие плёнки, шепот в пустых комнатах. Я не выдумываю — я только соединяю точки. Кто-то называет это магией, кто-то — бредом. Но однажды вы узнаете в моих строках свой сон, которого не было. И тогда станет ясно, почему я пишу.»
+
+Каждый из них мог бы создавать странные, гипнотические миры — от сюрреалистичных притч до тревожных психологических загадок. Какой стиль ближе вам?`
     },
     {
         id: 2,
@@ -88,7 +90,7 @@ const stories = [
 
 А если способ не сработает — можно просто сесть перед холодильником и орать, пока его не откроют.`,
         author: "Барсучков",
-        aboutMe: "Я писатель, хотелось бы выложить свое творчество без осуждающих комментариев"
+        aboutMe: "Я смешиваю свет и ржавчину, смех и тишину после выстрела. Мои сюжеты рождаются на стыке «а что, если» и «но ведь нельзя». Здесь пауки плетут паутину из струн пианино, а ангелы пачкают крылья в грязи. Не ищите морали — ищите послевкусие. И да, последнюю главу вы допишете сами. В голове. В три часа ночи."
     },
     {
         id: 3,
@@ -116,17 +118,8 @@ const stories = [
 
 А утром, когда солнце заглянуло в комнату, кот сладко зевнул и устроился на подушке, готовясь к новому дню. Впереди был долгий сон, чтобы набраться сил для следующих ночных приключений.`,
         author: "Максим",
-        aboutMe: "."
+        aboutMe: "Я собираю осколки снов на краю яви. Мои истории — это тени, которые шевелятся, если на них не смотреть прямо. Иногда я пишу словами, иногда — молчанием между строк. Мои герои теряют имена, но обретают судьбы. Читатель? Он просто случайный путник, заглянувший в зеркало, которое я забыл разбить."
     },
-    {
-        id: 4,
-        firstAuhtor: 0,
-        title: "Test",
-        content: `  This is test!
-        dont panick`,
-        author: ".",
-        aboutMe: "."
-    }
 ];
 
 class StoryContainer{
@@ -160,23 +153,6 @@ class StateVisibility_Indiv_content{
     }
 }
 
-class StateVisibility_In_AboutAthtor{
-
-    constructor(secondA, firstA){
-        this.second = secondA;
-        this.first = firstA;
-    }
-
-    secondAuhtor() {
-        second.style.display = 'none';
-        first.style.display = 'block';
-    }
-    firstAuhtor() {
-        second.style.display = 'block';
-        first.style.display = 'none';
-    }
-}
-
 const catalogLine = document.getElementById('catalogLink');
 const storyListContainer = document.getElementById('storyListContainer');
 const storyContentContainer = document.getElementById('storyContentContainer');
@@ -189,22 +165,25 @@ const authorName = document.getElementById('authorName');
 const authorAbout = document.getElementById('authorAbout');
 
 const StateVisibilityContener = new StateVisibility_Indiv_content(storyListContainer, storyContentContainer, storyCreator);
-const StateVisibilityAboutAthtor = new StateVisibility_In_AboutAthtor(secondAuhtor, firstAuhtor);
 
 storyCreator.style.display = 'none';
 
 
 function showStoryList() {
     StateVisibilityContener.visListStory();
+
+    if (localStorage.getItem('cookieDecision') === 'accepted') {
+         document.cookie = `lastStoryId=${-1}; max-age=${60*60*24*7}; path=/`;
+    }
+
     renderStoryList();
 }
 
 function showStoryContent(storyId) {
     const story = stories.find(s => s.id === storyId);
     if (!story) return;
-
-    console.log(localStorage.getItem('cookieConsent'))
-    if (localStorage.getItem('cookieConsent') === 'accepted') {
+    
+    if (localStorage.getItem('cookieDecision') === 'accepted') {
         document.cookie = `lastStoryId=${storyId}; max-age=${60*60*24*7}; path=/`;
     }
 
@@ -260,6 +239,12 @@ function checkCookies() {
     
     if (lastStoryCookie) {
         const lastStoryId = parseInt(lastStoryCookie.split('=')[1]);
+
+        if (lastStoryId = -1){
+            showStoryList();
+            return;
+        }
+
         showStoryContent(lastStoryId);
     } else {
         showStoryList();
@@ -287,3 +272,4 @@ function renderStoryList() {
 
 
 document.addEventListener('DOMContentLoaded', checkCookies);
+
