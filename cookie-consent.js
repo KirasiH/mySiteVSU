@@ -23,7 +23,7 @@ if (checkCookieConsent() === null) {
       localStorage.setItem('cookieConsent', 'rejected');
       popup.style.display = 'none';
     };
-  
+}
   
 const buttondeletecookie = document.getElementById("deletecookiebutton");
 
