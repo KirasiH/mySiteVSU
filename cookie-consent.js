@@ -28,8 +28,8 @@ if (checkCookieConsent() === null) {
 const buttondeletecookie = document.getElementById("deletecookiebutton");
 
 buttondeletecookie.addEventListener("click", ()=>{ 
-	const cookie = document.cookie.split(".");
-	for (const cookie of cookie){
+	const cookies = document.cookie.split(".");
+	for (const cookie of cookies){
 		const [name] = cookie.trim().split("=");
 		document.cookie = `${name}=; expires=Thu; 01 Jan 1970 00:00:00 UTC; path=/;`;
 	}
