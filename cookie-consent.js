@@ -26,7 +26,7 @@ if (checkCookieConsent() === null) {
   
   
 const buttondeletecookie = document.getElementById("deletecookiebutton");
-  =
+
 buttondeletecookie.addEventListener("click", ()=>{ 
 	const cookie = document.cookie.split(".");
 	for (const cookie of cookie){
