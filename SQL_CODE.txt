@@ -1,0 +1,21 @@
+USE SiteVGUDatabase;
+SELECT * FROM users;
+
+-- Создаем таблицы заново
+CREATE TABLE IF NOT EXISTS users (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    username VARCHAR(255) NOT NULL,
+    email TEXT,
+    about TEXT,
+    password VARCHAR(255) NOT NULL,
+    token VARCHAR(255) NOT NULL UNIQUE,
+    token_expires_at INT NOT NULL DEFAULT 0 COMMENT 'Unix timestamp, когда токен истекает'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+CREATE TABLE IF NOT EXISTS stories (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    id_author INT NOT NULL,
+    title VARCHAR(255) NOT NULL,  -- Новый столбец для названия истории
+    story TEXT NOT NULL,
+    FOREIGN KEY (id_author) REFERENCES users(id) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
